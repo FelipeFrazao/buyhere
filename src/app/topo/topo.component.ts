@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from "../data.service";
 
 @Component({
   selector: 'bh-topo',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private data: DataService) {}
+
+  public categ: string;
+
 
   ngOnInit() {
+    this.data.currentCat.subscribe(cate => this.categ = cate);
   }
-
+  public pegaCat(categoria): void {
+    this.data.changeCat(categoria);
+    console.log(categoria);
+  }
 }
+
+// export class Categoria {
+//
+//   constructor() {}
+//
+//   public categoria: string;
+//
+//   public pegaCat(cat): void {
+//     this.categoria = cat;
+//     console.log(cat);
+//   }
+// }
