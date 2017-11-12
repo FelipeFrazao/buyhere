@@ -13,7 +13,19 @@ import { RestaurantesComponent } from './restaurantes/restaurantes.component';
 import { DiversaoComponent } from './diversao/diversao.component';
 import { OfertaComponent } from './oferta/oferta.component';
 import { OfertasComponent } from './ofertas/ofertas.component';
-import {DataService} from "./data.service";
+import { DataService } from "./data.service";
+import { AngularFireDatabase } from "angularfire2/database-deprecated";
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyA_jmmwVK2LhypwmDvWVWYFfmlCVe888ok",
+  authDomain: "buyhere-161a7.firebaseapp.com",
+  databaseURL: "https://buyhere-161a7.firebaseio.com",
+  projectId: "buyhere-161a7",
+  storageBucket: "buyhere-161a7.appspot.com",
+  messagingSenderId: "745705979940"
+};
 
 @NgModule({
   declarations: [
@@ -29,9 +41,12 @@ import {DataService} from "./data.service";
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
-  providers: [DataService],
+  providers: [DataService, AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

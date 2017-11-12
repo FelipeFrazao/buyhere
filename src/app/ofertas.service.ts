@@ -2,7 +2,6 @@ import { Http } from "@angular/http";
 import { Injectable } from "@angular/core";
 import { Oferta } from './shared/oferta.model';
 import {reject} from "q";
-import { TopoComponent } from "./topo/topo.component";
 import 'rxjs/add/operator/toPromise';
 import {toPromise} from "rxjs/operator/toPromise";
 import { URL_API } from "./app.api";
@@ -13,11 +12,13 @@ export class OfertasService {
   constructor (private http: Http) {}
 
   public getOfertas(): Promise<Oferta[]> {
+
     // Fazer get na api rest
     return this.http.get(`${URL_API}?destaque=true`)
       .toPromise()
       .then((resposta: any) => resposta.json());
   }
+
   public getOfertasPorCategoria(cat: string): Promise<Oferta[]> {
     return this.http.get(`${URL_API}?categoria=${cat}`)
       .toPromise()
