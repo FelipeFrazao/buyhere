@@ -14,9 +14,10 @@ import { DiversaoComponent } from './diversao/diversao.component';
 import { OfertaComponent } from './oferta/oferta.component';
 import { OfertasComponent } from './ofertas/ofertas.component';
 import { DataService } from "./data.service";
-import { AngularFireDatabase } from "angularfire2/database-deprecated";
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule} from "angularfire2/firestore";
 import { AngularFireModule } from 'angularfire2';
+import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
+import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA_jmmwVK2LhypwmDvWVWYFfmlCVe888ok",
@@ -37,15 +38,17 @@ export const firebaseConfig = {
     DiversaoComponent,
     OfertaComponent,
     OfertasComponent,
+    ComoUsarComponent,
+    OndeFicaComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFirestoreModule.enablePersistence()
   ],
-  providers: [DataService, AngularFireDatabase],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
