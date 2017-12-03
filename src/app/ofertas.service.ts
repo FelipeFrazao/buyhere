@@ -44,4 +44,16 @@ export class OfertasService {
       `);
       });
   }
+  public getondeFica(id: number): Promise <string> {
+    return this.http.get(`${URL_API}onde-fica?id=${id}`)
+      .toPromise()
+      .then((response: any) => {
+        return response.json()[0].descricao;
+      })
+      .catch((erro: Error) => {
+        console.log(`Nome do erro ${erro.name}
+      Mensagem do erro ${erro.message}
+      `);
+      });
+  }
 }

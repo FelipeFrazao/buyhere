@@ -11,13 +11,15 @@ export class ComoUsarComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private oS: OfertasService) { }
 
-  public comoUsar: any;
+  public comoUsar: string;
   ngOnInit() {
-    const id = this.route.parent.snapshot.params['id'];
-    this.oS.getComoUsar(this.route.parent.snapshot.params['id'])
+    const ID = this.route.parent.snapshot.params['id'];
+    this.oS.getComoUsar(ID)
       .then((response: any) => {
         this.comoUsar = response;
-        console.log(this.comoUsar);
+      })
+      .catch((erro: Error) => {
+      this.comoUsar = erro.message;
       });
   }
 
