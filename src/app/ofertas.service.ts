@@ -5,43 +5,43 @@ import {reject} from "q";
 import 'rxjs/add/operator/toPromise';
 import {toPromise} from "rxjs/operator/toPromise";
 import { URL_API } from "./app.api";
-import { Observable } from 'rxjs/Observable';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 export interface Ofertta { titulo: string; categoria: string; }
 
 @Injectable()
 export class OfertasService {
 
-  OfertaCollection: AngularFirestoreCollection<Ofertta>;
-  oferttas: Observable<Ofertta[]>;
-  constructor (private http: Http, private afs: AngularFirestore) {
-
-    this.OfertaCollection = this.afs.collection<Ofertta>('ofertas', ref => {
-      // Compose a query using multiple .where() methods
-      return ref
-        .where('categoria', '==', 'diversao');
-    });
-    this.oferttas = this.OfertaCollection.valueChanges();
-  }
+  constructor (private http: Http) { }
   public getOfertas(): Promise<Oferta[]> {
 
     // Fazer get na api rest
-    return this.http.get(`${URL_API}?destaque=true`)
+    return this.http.get(`${URL_API}ofertas?destaque=true`)
       .toPromise()
       .then((resposta: any) => resposta.json());
   }
 
   public getOfertasPorCategoria(cat: string): Promise<Oferta[]> {
-    return this.http.get(`${URL_API}?categoria=${cat}`)
+    return this.http.get(`${URL_API}ofertas?categoria=${cat}`)
       .toPromise()
       .then((resposta: any) => resposta.json());
   }
   public getOfertaPorId(id: number): Promise<Oferta> {
-    return this.http.get(`${URL_API}?id=${id}`)
+    return this.http.get(`${URL_API}ofertas?id=${id}`)
       .toPromise()
       .then((resposta: any) => {
         return resposta.json()[0];
+      });
+  }
+  public getComoUsar(id: number): Promise<string> {
+    return this.http.get(`${URL_API}como-usar?id=${id}`)
+      .toPromise()
+      .then((response: any) => {
+        return response.json()[0].descricao;
+      })
+      .catch((erro: Error) => {
+        console.log(`Nome do erro ${erro.name}
+      Mensagem do erro ${erro.message}
+      `);
       });
   }
 }
