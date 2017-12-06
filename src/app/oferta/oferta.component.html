@@ -1,6 +1,13 @@
 <div class="container">
   <div class="oferta mb-5" *ngIf="oferta !==undefined">
 
+    <!--<div class="row">-->
+      <!--<div class="col">-->
+        <!--<a [routerLink]="['/oferta', 1]">Oferta 1</a>-->
+        <!--<a [routerLink]="['/oferta', 2]">Oferta 2</a>-->
+        <!--<a [routerLink]="['/oferta', 3]">Oferta 3</a>-->
+      <!--</div>-->
+    <!--</div>-->
     <div class="row">
       <div class="col">
         <h4>{{oferta.titulo}}</h4>
@@ -13,7 +20,6 @@
         <div class="img_capa">
           <img [src]="oferta.imagens[0].url" />
         </div>
-
         <div class="thumbnails">
           <img *ngFor="let img of oferta.imagens" [src]="img.url" />
         </div>
@@ -24,9 +30,7 @@
           <div class="col text-center">
             <p>Por apenas</p>
           </div>
-
         </div>
-
         <div class="row">
           <div class="col text-center">
             <h1>{{oferta.valor | currency: 'BRL':true}}</h1>
@@ -38,11 +42,8 @@
             <button type="button" class="btn btn-outline-primary">Adicionar ao carrinho</button>
           </div>
         </div>
-
       </div>
-
     </div>
-
   </div>
 
   <div class="row mb-lg-5">

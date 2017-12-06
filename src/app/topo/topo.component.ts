@@ -12,6 +12,9 @@ export class TopoComponent implements OnInit {
 
   public categ: string;
 
+  public pesquisa(busca: string): void {
+    console.log(busca);
+  }
 
   ngOnInit() {
     this.data.currentCat.subscribe(cate => this.categ = cate);
@@ -20,16 +23,6 @@ export class TopoComponent implements OnInit {
     this.data.changeCat(categoria);
     console.log(categoria);
   }
+
 }
 
-// export class Categoria {
-//
-//   constructor() {}
-//
-//   public categoria: string;
-//
-//   public pegaCat(cat): void {
-//     this.categoria = cat;
-//     console.log(cat);
-//   }
-// }
