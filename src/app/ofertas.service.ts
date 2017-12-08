@@ -1,10 +1,10 @@
 import { Http } from "@angular/http";
 import { Injectable } from "@angular/core";
 import { Oferta } from './shared/oferta.model';
-import {reject} from "q";
 import 'rxjs/add/operator/toPromise';
-import {toPromise} from "rxjs/operator/toPromise";
+import 'rxjs/add/operator/map';
 import { URL_API } from "./app.api";
+import { Observable } from "rxjs/Observable";
 
 export interface Ofertta { titulo: string; categoria: string; }
 
@@ -55,5 +55,9 @@ export class OfertasService {
       Mensagem do erro ${erro.message}
       `);
       });
+  }
+  public pesquisarOferta(termo: string): Observable<Oferta[]> {
+    return this.http.get(`${URL_API}ofertas?descricao_oferta${termo}`)
+      .map((response: any) => response.json());
   }
 }
