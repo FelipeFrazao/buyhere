@@ -18,6 +18,7 @@ import { AngularFirestoreModule} from "angularfire2/firestore";
 import { AngularFireModule } from 'angularfire2';
 import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
 import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
+import {OfertasService} from "./ofertas.service";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA_jmmwVK2LhypwmDvWVWYFfmlCVe888ok",
@@ -48,7 +49,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence()
   ],
-  providers: [DataService],
+  providers: [DataService, OfertasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
